@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<head>
+
+  <title>Lovesac | Shoe Maps</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous">
+  </script>
+
+  <style>
+	/* ---- non-isotope elements ---- */
+
+	body {
+		margin: 0px;
+		width: 100%
+	}
+
+	.shoemaps-header {
+		background-image: url("ShoeMap-desktop.jpg");
+		align-items: center;
+		background-position-x: 50%;
+		background-size: cover;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+		text-align: center;
+		width: 100%;
+		min-height: 447px;
+		line-height: 20px;
+	}
+
+	.shoemaps-header--title {
+		box-sizing: border-box;
+		display: block;
+		font-size: 42px;
+		font-family: "MillerDisplayLight", serif;
+		font-weight: 500;
+		color: #FFFFFF;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	.shoemaps-header--subtitle {
+		text-align: center;
+		font-family: "MuseoSans500", sans-serif;
+		box-sizing: border-box;
+		display: block;
+		color: #FFFFFF;
+		font-size: 18px;
+		margin: 0 auto;
+	}
+
+	.shoemaps-description {
+		text-align: center;
+		font-size: 18px;
+		font-family: "MuseoSans500";
+		color: #54585A;
+		width: 80%;
+		margin: 30px auto 15px auto;
+	}
+
+	.isotope-controls {
+		margin-top: 20px;
+		text-align: center;
+	}
+
+	.shoemaps-cta {
+		background-color: #009CA6;
+		font-family: MuseoSans500;
+		color: #FFFFFF;
+		display: inline-block;
+		white-space: nowrap;
+		font-size: 14px;
+		padding: 12px 30px;
+		text-align: center !important;
+		margin: 75px auto 50px auto !important;
+		text-decoration: none;
+		letter-spacing: 1px;
+		z-index: 0;
+	}
+
+	.shoemaps-cta:hover {
+		cursor: pointer;
+		color: #FFFFFF;
+		text-decoration: none;
+	}
+
+	.shoemaps-cta:focus {
+		text-decoration: underline;
+		color: #FFFFFF;
+	}
+
+	.shoemaps-cta-wrapper {
+		text-align: center;
+		margin: 30px 0px 50px 0px;
+		z-index: 0;
+	}
+	/** { box-sizing: border-box; }*/
+
+	select {
+		font-size: 20px;
+	}
+
+	input {
+		white-space: nowrap;
+	}
+	/* ---- isotope ---- */
+
+	.grid {
+		margin: 30px 20px 0px 20px;
+	}
+
+	.grid-wrapper {
+		margin: 0 auto;
+	}
+
+	@media screen and (min-width: 1024px) {
+		.grid {
+			margin: 30px 45px 0px 45px;
+		}
+	}
+
+	@media screen and (min-width:1920px) {
+		.grid {
+			margin: 30px 70px 0px 70px;
+		}
+	}
+	/* clear fix */
+
+	.isotope:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	.select-config {
+		width: 100%;
+		text-align: center !important;
+		font-family: "MuseoSans500", sans-serif;
+		margin: 20px 0px;
+	}
+
+	.select-config > svg {
+		margin: 0 auto !important;
+	}
+	/* ---- .element-item ---- */
+
+	.element-item {
+		position: relative;
+		float: left;
+		width: 150px;
+		margin: 5px;
+		/* padding: 10px; background: #888; color: #262524; */
+	}
+	/* ---- tile styles ---- */
+
+	.preview-frame {
+		width: 150px;
+		height: 150px;
+		border: 1px solid #009CA6;
+		background-size: 100% 100%;
+		background-position: center;
+	}
+
+	.pdf {
+		fill: #FFFFFF;
+		position: absolute;
+		/* z-index: 99999999; */
+		left: 123px;
+		top: 123px;
+		outline: 2px solid #FFFFFF;
+	}
+
+	.item-description {
+		margin-top: 5px;
+		text-align: center;
+		font-family: "MuseoSans500", sans-serif;
+		color: #54585A;
+		font-size: 1em;
+	}
+
+	@media screen and (max-width:768px) {
+		.shoemaps-header {
+			background-image: url("ShoeMap-mobile.jpg");
+		}
+	}
+  </style>
+</head>
+
+<body>
+
+<div class="shoemaps-header">
+
+	<h1 class="shoemaps-header--title">Sactionals Configuration Guides</h1>
+	<br>
+
+	<p class="shoemaps-header--subtitle">Create the most comfortable configuration for any occasion.</p>
+</div>
+
+<p class="shoemaps-description">Sactionals can rearrange again and again, so they will always fit your space or need. Below, select a number of Seats and Sides to see some of our most popular configurations and how to put them together.</p>
+<div class="isotope-controls">
+	<select class="filters-select">
+		<option value=".select-config"> - Choose Configuration -</option>
+		<option value=".2-4">2 seats + 4 sides</option>
+		<option value=".3-4">3 seats + 4 sides</option>
+		<option value=".3-5">3 seats + 5 sides</option>
+		<option value=".4-4">4 seats + 4 sides</option>
+		<option value=".4-5">4 seats + 5 sides</option>
+		<option value=".5-5">5 seats + 5 sides</option>
+		<option value=".6-6">6 seats + 6 sides</option>
+		<option value=".6-8">6 seats + 8 sides</option>
+		<option value=".7-8">7 seats + 8 sides</option>
+		<option value=".8-10">8 seats + 10 sides</option>
+		<option value=".10-12">10 seats + 12 sides</option>
+	</select>
+	<br>
+	<br>
+
+	<p style="white-space:nowrap;">
+		<input type="checkbox" name="deep-checkbox" value=".d"> Deep Side Layouts</p>
+</div>
+<div class="grid-wrapper">
+	<div class="grid">
+		<div class="select-config" style="text-align:center;" value=".select-config">
+			<svg width="280" height="255" viewBox="0 0 381 347" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<rect width="381" height="347" fill="white"></rect>
+				<path d="M160.075 170.508H220.694V220.135H160.075V170.508Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M80.1392 195.309V255.928H69.1477V195.309H80.1392Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M129.792 266.919H69.1477V255.953H129.792V266.919Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M190.385 74.0723H129.766V63.0808H190.385V74.0723Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M251.003 74.0723H190.385V63.0808H251.003V74.0723Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M190.385 123.699H129.766V74.0723H190.385V123.699Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M251.003 123.699H190.385V74.0723H251.003V123.699Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M129.766 195.309V255.928H80.1392V195.309H129.766Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M129.766 134.691V195.309H80.1392V134.691H129.766Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M69.1477 134.691V74.0469H80.1139V134.691H69.1477Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M69.1477 195.309V134.691H80.1139V195.309H69.1477Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M129.766 74.0469H69.1477V63.0808H129.766V74.0469Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M80.1392 134.691V74.0469H129.766V134.691H80.1392Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M250.978 134.691H311.596V184.318H250.978V134.691Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M300.63 134.691V74.0469H311.596V134.691H300.63Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M251.003 63.0808H311.622V74.0469H251.003V63.0808Z" fill="#F6F6F7" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M251.003 134.691V74.0469H300.63V134.691H251.003Z" fill="#6AC8CE" stroke="#009CA7" stroke-opacity="0.75" stroke-width="1.11692"></path>
+				<path d="M87.6955 343H89.5015V337.274C89.5015 336.686 89.4035 335.734 89.4035 335.734H89.4315C89.4315 335.734 89.8795 336.7 90.2575 337.274L94.0235 343H95.8155V333.06H94.0235V338.8C94.0235 339.388 94.1215 340.34 94.1215 340.34H94.0935C94.0935 340.34 93.6455 339.374 93.2675 338.8L89.5015 333.06H87.6955V343ZM97.6463 337.96C97.6463 340.886 99.8583 343.168 102.784 343.168C105.71 343.168 107.922 340.886 107.922 337.96C107.922 335.118 105.71 332.892 102.784 332.892C99.8583 332.892 97.6463 335.118 97.6463 337.96ZM99.5083 337.96C99.5083 336 100.964 334.544 102.784 334.544C104.604 334.544 106.06 336 106.06 337.96C106.06 340.004 104.604 341.516 102.784 341.516C100.964 341.516 99.5083 340.004 99.5083 337.96ZM112.48 337.988C112.48 340.914 114.58 343.168 117.618 343.168C120.152 343.168 121.524 341.558 121.524 341.558L120.572 340.256C120.572 340.256 119.41 341.516 117.688 341.516C115.616 341.516 114.342 339.85 114.342 337.96C114.342 336.112 115.574 334.544 117.674 334.544C119.256 334.544 120.39 335.594 120.39 335.594L121.258 334.25C121.258 334.25 120.012 332.892 117.59 332.892C114.664 332.892 112.48 335.104 112.48 337.988ZM122.447 337.96C122.447 340.886 124.659 343.168 127.585 343.168C130.511 343.168 132.723 340.886 132.723 337.96C132.723 335.118 130.511 332.892 127.585 332.892C124.659 332.892 122.447 335.118 122.447 337.96ZM124.309 337.96C124.309 336 125.765 334.544 127.585 334.544C129.405 334.544 130.861 336 130.861 337.96C130.861 340.004 129.405 341.516 127.585 341.516C125.765 341.516 124.309 340.004 124.309 337.96ZM134.563 343H136.369V337.274C136.369 336.686 136.271 335.734 136.271 335.734H136.299C136.299 335.734 136.747 336.7 137.125 337.274L140.891 343H142.683V333.06H140.891V338.8C140.891 339.388 140.989 340.34 140.989 340.34H140.961C140.961 340.34 140.513 339.374 140.135 338.8L136.369 333.06H134.563V343ZM145.199 343H147.005V338.982H150.295V337.428H147.005V334.614H150.911V333.06H145.199V343ZM152.61 343H154.416V333.06H152.61V343ZM156.258 338.016C156.258 341.138 158.512 343.168 161.13 343.168C162.978 343.168 164.014 342.104 164.014 342.104H164.042C164.042 342.104 164.028 342.314 164.028 342.524V343H165.568V337.764H162.418V339.318H163.944V340.48C163.944 340.48 162.95 341.516 161.452 341.516C159.59 341.516 158.12 340.116 158.12 337.96C158.12 336.084 159.31 334.544 161.536 334.544C163.118 334.544 164.182 335.496 164.182 335.496L165.078 334.152C165.078 334.152 163.818 332.892 161.382 332.892C158.428 332.892 156.258 335.132 156.258 338.016ZM167.427 339.43C167.427 341.656 169.037 343.168 171.445 343.168C173.839 343.168 175.449 341.656 175.449 339.43V333.06H173.643V339.416C173.643 340.76 172.761 341.516 171.431 341.516C170.101 341.516 169.233 340.76 169.233 339.43V333.06H167.427V339.43ZM177.834 343H179.64V339.29H181.376L183.35 343H185.366L183.322 339.29C183.126 338.94 182.986 338.8 182.986 338.8V338.772C184.036 338.352 184.666 337.246 184.666 336.056C184.666 334.74 184.036 333.788 183.042 333.34C182.608 333.144 182.118 333.06 181.04 333.06H177.834V343ZM179.64 337.722V334.614H181.012C182.426 334.614 182.832 335.202 182.832 336.154C182.832 337.148 182.23 337.722 181.264 337.722H179.64ZM192.831 343H194.693L191.193 333.06H189.303L185.803 343H187.665L188.505 340.452H191.991L192.831 343ZM190.269 334.782C190.269 334.782 190.479 335.762 190.661 336.322L191.543 338.982H188.939L189.821 336.322C190.017 335.762 190.241 334.782 190.241 334.782H190.269ZM197.447 343H199.253V334.614H202.515V333.06H194.185V334.614H197.447V343ZM203.824 343H205.63V333.06H203.824V343ZM207.459 337.96C207.459 340.886 209.671 343.168 212.597 343.168C215.523 343.168 217.735 340.886 217.735 337.96C217.735 335.118 215.523 332.892 212.597 332.892C209.671 332.892 207.459 335.118 207.459 337.96ZM209.321 337.96C209.321 336 210.777 334.544 212.597 334.544C214.417 334.544 215.873 336 215.873 337.96C215.873 340.004 214.417 341.516 212.597 341.516C210.777 341.516 209.321 340.004 209.321 337.96ZM219.574 343H221.38V337.274C221.38 336.686 221.282 335.734 221.282 335.734H221.31C221.31 335.734 221.758 336.7 222.136 337.274L225.902 343H227.694V333.06H225.902V338.8C225.902 339.388 226 340.34 226 340.34H225.972C225.972 340.34 225.524 339.374 225.146 338.8L221.38 333.06H219.574V343ZM232.859 341.81C232.859 341.81 234.077 343.168 236.289 343.168C238.361 343.168 239.565 341.838 239.565 340.256C239.565 337.078 234.889 337.512 234.889 335.748C234.889 335.048 235.547 334.558 236.387 334.558C237.633 334.558 238.585 335.426 238.585 335.426L239.369 333.956C239.369 333.956 238.361 332.892 236.401 332.892C234.497 332.892 233.069 334.124 233.069 335.776C233.069 338.828 237.759 338.52 237.759 340.298C237.759 341.11 237.073 341.502 236.317 341.502C234.917 341.502 233.839 340.452 233.839 340.452L232.859 341.81ZM241.367 343H247.541V341.446H243.173V338.772H246.519V337.218H243.173V334.614H247.317V333.06H241.367V343ZM249.42 343H255.524V341.446H251.226V333.06H249.42V343ZM256.967 343H263.141V341.446H258.773V338.772H262.119V337.218H258.773V334.614H262.917V333.06H256.967V343ZM264.279 337.988C264.279 340.914 266.379 343.168 269.417 343.168C271.951 343.168 273.323 341.558 273.323 341.558L272.371 340.256C272.371 340.256 271.209 341.516 269.487 341.516C267.415 341.516 266.141 339.85 266.141 337.96C266.141 336.112 267.373 334.544 269.473 334.544C271.055 334.544 272.189 335.594 272.189 335.594L273.057 334.25C273.057 334.25 271.811 332.892 269.389 332.892C266.463 332.892 264.279 335.104 264.279 337.988ZM277.045 343H278.851V334.614H282.113V333.06H273.783V334.614H277.045V343ZM283.422 343H289.596V341.446H285.228V338.772H288.574V337.218H285.228V334.614H289.372V333.06H283.422V343ZM291.475 343H294.863C297.929 343 299.931 341.152 299.931 338.016C299.931 334.88 297.929 333.06 294.863 333.06H291.475V343ZM293.281 341.446V334.614H294.765C296.753 334.614 298.069 335.804 298.069 338.016C298.069 340.256 296.781 341.446 294.765 341.446H293.281Z" fill="#767676"></path>
+			</svg>
+		</div>
+		<!-- ***** 2 SEATS + 4 SIDES ***** -->
+		<!-- 2+4 Sofa -->
+		<div class="element-item 2-4" data-category="2-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/2%2B4/PDF/2%2B4-Sofa.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/2%2B4%2DSofa%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- 2+4 Deep Sofa -->
+		<div class="element-item 2-4" data-category="2-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/2%2B4/PDF/2%2B4%2DDeep%2DSofa%2DLoveseat.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/2%2B4%2DDeep%2DSofa%2DLoveseat%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- 2+4 Half Deep -->
+		<div class="element-item 2-4" data-category="2-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/2%2B4/PDF/2%2B4%2DHalf%2DDeep.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/2%2B4%2DHalf%2DDeep%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 3 SEATS + 4 SIDES ***** -->
+		<!-- Mod Small Chaise Sectional -->
+		<div class="element-item 3-4" data-category="3-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B4/PDF/3%2B4%2DMod%2DSmall%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DMod%2DSmall%2DChaise%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Small Armless Sectional -->
+		<div class="element-item 3-4" data-category="3-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B4/PDF/3%2B4%2DSmall%2DArmless%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DSmall%2DArmless%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Sofa + Chaise -->
+		<div class="element-item 3-4" data-category="3-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B4/PDF/3%2B4%2DSofa%2D%2B%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DSofa%2D%2B%2DChaise%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Sofa + Ottoman -->
+		<div class="element-item 3-4" data-category="3-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B4/PDF/3%2B4%2DSofa%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DSofa%2D%2B%2DOttoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Sofa + Ottoman -->
+		<div class="element-item 3-4" data-category="3-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B4/PDF/3%2B4%2DDeep%2DSofa%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DDeep%2DSofa%2D%2B%2DOttoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Love Seat + Chaise -->
+		<div class="element-item 3-4" data-category="3-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B4/PDF/3%2B4%2DDeep%2DLove%2DSeat%2Dwith%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DDeep%2DLove%2DSeat%2Dwith%2DChaise%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- 3+4 Variation -->
+		<div class="element-item 3-4" data-category="3-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B4/PDF/3%2B4%2DVariation.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DVariation%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 3 SEATS + 5 SIDES ***** -->
+		<!-- DEEP: Deep Long Sofa -->
+		<div class="element-item 3-5 d" data-category="3-5-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B5/PDF/3%2B5%2DDeep%2DLong%2DSofa.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B5%2DDeep%2DLong%2DSofa%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Sectional -->
+		<div class="element-item 3-5" data-category="3-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B5/PDF/3%2B5%2DDeep%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B5%2DDeep%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Long Sofa -->
+		<div class="element-item 3-5" data-category="3-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B5/PDF/3%2B5%2DLong%2DSofa.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B5%2DLong%2DSofa%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- 3+5 Sectional -->
+		<div class="element-item 3-5" data-category="3-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B5/PDF/3%2B5%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B5%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Theater Seating -->
+		<div class="element-item 3-5" data-category="3-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B5/PDF/3%2B5%2DTheater%2DSeating%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B5%2DTheater%2DSeating%2D%2B%2DOttoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Theater Seating + Ottoman -->
+		<div class="element-item 3-5" data-category="3-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/3%2B5/PDF/3%2B5%2DTheater%2DSeating.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B5%2DTheater%2DSeating%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 4 SEATS + 4 SIDES ***** -->
+		<!-- Chaise Sectional -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DChaise%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Clover Leaf -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DClover%2DLeaf.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DClover%2DLeaf%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Corner Sectional -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DCorner%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DCorner%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- DEEP: Deep Sectional + Chaise -->
+		<div class="element-item 4-4 d" data-category="4-4-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DDeep%20Sactional%2D%2B%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DDeep%2DSactional%2D%2B%2DChaise%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Double Armless Loveseat -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2Ddouble%2Darmless%2Dloveseat.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4-double-armless-loveseat-1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Floating Ottoman -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2Dfloating%2Dottoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2Dfloating%2Dottoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Guest Rest -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DGuest%2DRest.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DGuest%2DRest%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Long + Ottoman -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DLong%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DLong%2D%2B%2DOttoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Loveseat + Connected Ottoman -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DLoveseat%2D%26%2DConnected%20Ottoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DLoveseat%2D%26%2DConnected%2DOttoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Mod Chaise + Ottoman -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DMod%2DChaise%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DMod%2DChaise%2D%2B%2DOttoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Mod Corner Sectional -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DMod%2DCorner%2DSactional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DMod%2DCorner%2DSactional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Movie Lounger -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DMovie%2D%2D%2Domit%2Dshoe.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4-Movie---omit-shoe-1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Sectional + Chaise -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DSectional%2D%2B%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4-Sectional-%2B-Chaise-1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Side Chaise -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DSide%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DSide%2DChaise%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Sofa + 2 Ottomans -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DSofa%2D%2B%2D2%2DOttomans.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DSofa%2D%2B%2D2%2DOttomans%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Sofa + Chaise + Ottoman -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DSofa%2D%2D%2DChaise%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DSofa%2D%2D%2DChaise%2D%2B%2DOttoman%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Wide Movie Lounger -->
+		<div class="element-item 4-4" data-category="4-4">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B4/PDF/4%2B4%2DWide%2DMovie%2DLounger.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B4%2DWide%2DMovie%2DLounger%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 4 SEATS + 5 SIDES ***** -->
+		<!-- Armless Sectional -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DArmless%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DArmless%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Chaise Sectional -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Chaise Sectional -->
+		<div class="element-item 4-5 d" data-category="4-5-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DDeep%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DDeep%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Chaise -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2Ddeep%2Dchaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2D%2B5%2Ddeep%2Dchaise%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Sectional with Ottoman -->
+		<div class="element-item 4-5 d" data-category="4-5-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DDeep%2DSactional%2Dw%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DDeep%2DSactional%2Dw%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Long Sofa + Ottoman -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DLong%2DSofa%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DLong%2DSofa%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Mod Chaise Sectional A -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DMod%2DChaise%20Sectional%2DA.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DMod%2DChaise%2DSectional%2DA%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Mod Chaise Sectional -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DMod%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DMod%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Mod Deep Chaise Sectional -->
+		<div class="element-item 4-5 d" data-category="4-5-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DMod%2DDeep%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DMod%2DDeep%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+			<br>
+		</div>
+		<!-- Reverse Chaise Sectional -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DReverse%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DReverse%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- 4+5 Sectional -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Short L -->
+		<div class="element-item 4-5 d" data-category="4-5-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DShort%2DL.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DShort%2DL%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Small Sectional + Ottoman -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DSmall%2DSectional%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DSmall%2DSectional%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Small Sectional -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DSmall%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DSmall%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Tetris -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DTetris.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DTetris%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Theater Seating + Ottomans -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DTheater%2DSeating%2D%2B%2DOttomans.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DTheater%2DSeating%2D%2B%2DOttomans%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Theater Seating -->
+		<div class="element-item 4-5" data-category="4-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/4%2B5/PDF/4%2B5%2DTheater%2DSeating.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/4%2B5%2DTheater%2DSeating%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 5 SEATS + 5 SIDES ***** -->
+		<!-- Chaise Sectional + Ottoman -->
+		<div class="element-item 5-5" data-category="5-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/5%2B5/PDF/5%2B5%2DChaise%2DSectional%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/5%2B5%2DChaise%2DSectional%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Double Chaise Sectional -->
+		<div class="element-item 5-5 d" data-category="5-5-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/5%2B5/PDF/5%2B5%2DDeep%2DDouble%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/5%2B5%2DDeep%2DDouble%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- L-Shape With Ottoman -->
+		<div class="element-item 5-5" data-category="5-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/5%2B5/PDF/5%2B5%2DL%2Dshape%2Dwith%2Dottoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/5%2B5%2DL%2Dshape%2Dwith%2Dottoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Lounger -->
+		<div class="element-item 5-5" data-category="5-5">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/5%2B5/PDF/5%2B5%2DLounger.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/5%2B5%2DLounger%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 6 SEATS + 6 SIDES ***** -->
+		<!-- Deep Double Chaise Sectional -->
+		<div class="element-item 6-6 d" data-category="6-6-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B6/PDF/6%2B6%2DDeep%2DDouble%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B6%2DDeep%2DDouble%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Double Chaise Sectional -->
+		<div class="element-item 6-6" data-category="6-6">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B6/PDF/6%2B6%2DDouble%2DChaise%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B6%2DDouble%2DChaise%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- L + Ottoman -->
+		<div class="element-item 6-6 d" data-category="6-6-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B6/PDF/6%2B6%2DL%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B6%2DL%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Long Chaise + Ottoman -->
+		<div class="element-item 6-6" data-category="6-6">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B6/PDF/6%2B6%2DLong%2DChaise%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B6%2DLong%2DChaise%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Long Sofa + Long Chaise -->
+		<div class="element-item 6-6" data-category="6-6">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B6/PDF/6%2B6%2DLong%2DSofa%2D%2B%2DLong%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B6%2DLong%2DSofa%2D%2B%2DLong%2DChaise%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Loveseat + Chair -->
+		<div class="element-item 6-6" data-category="6-6">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B6/PDF/6%2B6%2Dloveseat%2Dand%2Dchair.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B6%2Dloveseat%2Dand%2Dchair%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Tip L -->
+		<div class="element-item 6-6" data-category="6-6">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B6/PDF/6%2B6%2Dtip%2DL.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B6%2Dtip%2DL%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 6 SEATS + 8 SIDES ***** -->
+		<!-- Combo Sectional -->
+		<div class="element-item 6-8 d" data-category="6-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DCombo%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DCombo%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep C -->
+		<div class="element-item 6-8 d" data-category="6-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DDeep%2DC.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DDeep%2DC%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Finished Sectional -->
+		<div class="element-item 6-8" data-category="6-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DFinished%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DFinished%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Hybrid Sectional -->
+		<div class="element-item 6-8" data-category="6-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DHybrid%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DHybrid%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- L + Chaise -->
+		<div class="element-item 6-8" data-category="6-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DL%2D%2B%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DL%2D%2B%2DChaise%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- L Sectional + Ottoman -->
+		<div class="element-item 6-8" data-category="6-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DL%2DSectional%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DMod%2DSmall%2DChaise%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Mod Sectional + Ottoman -->
+		<div class="element-item 6-8 d" data-category="6-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DMod%2DSectional%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DMod%2DSectional%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Modified Lounger -->
+		<div class="element-item 6-8" data-category="6-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DModified%2DLounger.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DModified%2DLounger%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Sectional + Chaise Deep -->
+		<div class="element-item 6-8 d" data-category="6-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DSectional%2D%2B%2DChaise%20Deep.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DSectional%2D%2B%2DChaise%2DDeep%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- U Sectional -->
+		<div class="element-item 6-8" data-category="6-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/6%2B8/PDF/6%2B8%2DU%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/6%2B8%2DU%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 7 SEATS + 8 SIDES ***** -->
+		<!-- Asymmetrical Batwing -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DAsymmetrical%2DBatwing.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DAsymmetrical%2DBatwing%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Combo Sectional + Ottoman -->
+		<div class="element-item 7-8 d" data-category="7-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DCombo%2DSectional%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DCombo%2DSectional%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Hybrid Sectional -->
+		<div class="element-item 7-8 d" data-category="7-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DDeep%2DHybrid%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DDeep%2DHybrid%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Sectional -->
+		<div class="element-item 7-8 d" data-category="7-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DDeep%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DDeep%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep E Sectional -->
+		<div class="element-item 7-8 d" data-category="7-8-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DE%2DSactional%2D%28Deep%29.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DE%2DSactional%2D%28Deep%29%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Extra Long L -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DExtra%2DLong%2DL.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DExtra%2DLong%2DL%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- M Lounger -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DM%2DLounger.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DM%2DLounger%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Major Theater -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2Dmajo%2D%20theater.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2Dmajor%2Dtheater%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Mod Hybrid Sectional + Ottoman -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DMod%2DHybrid%2DSectional%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DMod%2DHybrid%2DSectional%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Movie Theater Loveseat -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DMovie%2DTheater%2DLoveseat.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DMovie%2DTheater%2DLoveseat%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Sectional + Chaise -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DSectional%2D%2B%2DChaise.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DSectional%2D%2B%2DChaise%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- U Sectional + Ottoman -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DU%2DSectional%2D%2B%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DU%2DSectional%2D%2B%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- U Sectional -->
+		<div class="element-item 7-8" data-category="7-8">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/7%2B8/PDF/7%2B8%2DU%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/7%2B8%2DU%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 8 SEATS + 10 SIDES ***** -->
+		<!-- C With Double Ottoman -->
+		<div class="element-item 8-10 d" data-category="8-10-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DC%2Dwith%2DDouble%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DC%2Dwith%2DDouble%2DOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep L Sactional with Ottoman -->
+		<div class="element-item 8-10 d" data-category="8-10-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DDeep%2DL%2DSactional%2Dwith%2DOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%20Deep%20L%20Sactional%20with%20Ottoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Deep Sectional + Ottoman -->
+		<div class="element-item 8-10 d" data-category="8-10-d">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DDeep%2DSectional%2BOttoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DDeep%2DSectional%2BOttoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- E + Double Ottoman -->
+		<div class="element-item 8-10" data-category="8-10">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DE%2D%2B%2Ddouble%2Dottoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DE%2D%2B%2Ddouble%2Dottoman%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- E Sectional -->
+		<div class="element-item 8-10" data-category="8-10">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DE%2DSactional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DE%2DSactional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Finished Moon Pit -->
+		<div class="element-item 8-10" data-category="8-10">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DFinished%2DMoon%2DPit.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DFinished%2DMoon%2DPit%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- H Sectional -->
+		<div class="element-item 8-10" data-category="8-10">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DH%2DSactional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DH%2DSactional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- J Sectional -->
+		<div class="element-item 8-10" data-category="8-10">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DJ%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DJ%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- 8+10 Sectional -->
+		<div class="element-item 8-10" data-category="8-10">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DJ%2DSectional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/8%2B10%2DSectional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Left Chaise -->
+		<div class="element-item 8-10" data-category="8-10">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/8%2B10/PDF/8%2B10%2DSides%2Dleft%2Dottoman.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/3%2B4%2DMod%2DSmall%2DChaise%2DSectional%2D1500x1500');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- ***** 10 SEATS + 12 SIDES ***** -->
+		<!-- Deep Pit -->
+		<div class="element-item 10-12" data-category="10-12">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/10%2B12/PDF/10%2B12%2DDeep%2DPit.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/10%2B12%2DDeep%2DPit%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- E Sectional -->
+		<div class="element-item 10-12" data-category="10-12">
+			<a href="https://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/10%2B12/PDF/10%2B12%2DE%2DSactional.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('https://s7d4.scene7.com/is/image/LovesacRender/10%2B12%2DE%2DSactional%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Extended Moon Pit -->
+		<div class="element-item 10-12" data-category="10-12">
+			<a href="http://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/10%2B12/PDF/10%2B12%2DExtended%2DMoon%2DPit.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('http://s7d4.scene7.com/is/image/LovesacRender/10%2B12%2DExtended%2DMoon%2Dpit%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- G-Lounger -->
+		<div class="element-item 10-12" data-category="10-12">
+			<a href="http://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/10%2B12/PDF/10%2B12%2DG%2DLounger.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('http://s7d4.scene7.com/is/image/LovesacRender/10%2B12%2DG%2DLounger%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+		<!-- Modified Moon Pit -->
+		<div class="element-item 10-12" data-category="10-12">
+			<a href="http://s7d4.scene7.com/is/content/LovesacRender/Shoe%20Maps/10%2B12/PDF/10%2B12%2DModified%2DMoonpit.pdf" target="_blank">
+				<div class="preview-frame" style="background-image:url('http://s7d4.scene7.com/is/image/LovesacRender/10%2B12%2DModified%2DMoonpit%2Dthumb');">
+					<svg class="pdf" xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+						<path fill="#009CA6" d="M0 0h24v24H0z"></path>
+						<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="shoemaps-cta-wrapper"><a class="shoemaps-cta" href="https://www.lovesac.com/search/modular-furniture/sectionals" target="_blank">SHOP SACTIONALS</a></div>
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script>
+	var $grid = $('.grid').isotope(
+	{
+		itemSelector: '.element-item, .select-config',
+		layoutMode: 'fitRows',
+		filter: '.select-config',
+    masonry: {}
+  });
+	var $isotopeControls = $('.isotope-controls');
+	var $isotopeSelects = $('.filters-select');
+	var $isotopeCheckboxes = $('.isotope-controls :checkbox');
+	$isotopeControls.on('change', onIsotopeChanged);
+	function onIsotopeChanged()
+	{
+		console.log('Changed!');
+		var filterValue = '';
+		var humanNames = [];
+		$isotopeSelects.each((i, elem) =>
+		{
+			let val = elem.value;
+			if (val != '.select-config')
+			{
+				filterValue += val;
+				// humanNames.append(HUMAN_NAMES[val]);
+			}
+		});
+		$isotopeCheckboxes.each((i, elem) =>
+		{
+			if (elem.checked)
+			{
+				filterValue += elem.value;
+			}
+			else
+			{
+				filterValue += ':not(' + elem.value + ')';
+				// humanNames.append(HUMAN_NAMES[val]);
+			}
+		});
+		console.log('Filter value: ' + filterValue);
+		$grid.isotope(
+			{
+				filter: filterValue
+			})
+			// update inner HTML of div with contents of humanNames
+	}
+</script>
+</body>
+
+</html>
